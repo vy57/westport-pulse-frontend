@@ -180,18 +180,19 @@
          * API Connection Logic
          * In Phase 2, we will use fetch() to grab the live data from your Node.js API at localhost:3000
          */
-        async function fetchMacroData() {
-            // NOTE: Commented out API fetch for now until the backend is fully deployed.
-            /*
-            try {
-                const response = await fetch('http://localhost:3000/api/affordability?zipCode=06880');
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error("Failed to connect to API backend:", error);
-                // Return fallback data if API is down
-            }
-            */
+async function fetchMacroData() {
+    try {
+        const response = await fetch('http://localhost:3000/api/affordability?zipCode=06880');
+        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        console.error("Failed to connect to API backend:", error);
+        return {
+            inputs: { mortgageRate: 0.0649, medianHomePrice: 2200000, millRate: 13.2 },
+            rentals: { medianGrossRent: 3500 }
+        };
+    }
+}
             
             // Mock data representing the shape of our future API response
             return {
