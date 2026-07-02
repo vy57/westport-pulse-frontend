@@ -7,13 +7,11 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom generic styles if needed, otherwise Tailwind handles everything */
         body { font-family: system-ui, -apple-system, sans-serif; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-blue-600">WestportPulse</h1>
@@ -25,13 +23,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="bg-blue-600 text-white py-16 px-4">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">The True Cost of Living in Westport</h2>
             <p class="text-xl mb-8 opacity-90">Tracking real-time macroeconomic data for community housing affordability.</p>
-            
-            <!-- At a Glance Banner -->
+
             <div class="flex flex-col md:flex-row justify-center gap-4 text-gray-800">
                 <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
                     <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Mortgage Rate</p>
@@ -49,15 +45,13 @@
         </div>
     </header>
 
-    <!-- Interactive Dashboard Section -->
     <section id="dashboard" class="py-16 px-4 max-w-6xl mx-auto">
         <h3 class="text-2xl font-bold mb-8 text-center border-b pb-4">Housing Affordability Engine</h3>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Controls -->
             <div class="bg-white p-6 rounded-lg shadow-sm border">
                 <h4 class="text-lg font-semibold mb-4">Calculate Your Burden</h4>
-                
+
                 <div class="mb-6">
                     <label class="block text-sm font-medium mb-2">Your Annual Income: <span id="incomeVal" class="font-bold text-blue-600">$250,000</span></label>
                     <input type="range" min="50000" max="1000000" step="10000" value="250000" class="w-full" id="incomeInput">
@@ -74,18 +68,16 @@
                         <span class="mr-3 text-sm text-gray-600">Buy</span>
                         <div class="relative">
                             <input type="checkbox" id="rentBuyToggle" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                         </div>
                         <span class="ml-3 text-sm text-gray-600">Rent</span>
                     </label>
                 </div>
             </div>
 
-            <!-- Visualization Canvas -->
             <div class="bg-white p-6 rounded-lg shadow-sm border flex flex-col items-center justify-center min-h-[300px]">
                 <h4 class="text-lg font-semibold mb-2">Housing Cost vs. Income</h4>
                 <p class="text-sm text-gray-500 mb-4 text-center">Standard rule of thumb suggests spending no more than 30% of gross income on housing.</p>
-                <!-- Canvas for our gauge/chart -->
                 <canvas id="affordabilityChart" width="300" height="150" class="w-full max-w-[300px]"></canvas>
                 <div class="mt-4 text-center">
                     <p class="text-gray-600 text-sm">Estimated Monthly Cost</p>
@@ -95,26 +87,22 @@
         </div>
     </section>
 
-    <!-- Local Insights & Articles -->
     <section id="insights" class="bg-white py-16 px-4">
         <div class="max-w-6xl mx-auto">
             <h3 class="text-2xl font-bold mb-8 text-center border-b pb-4">Local Insights</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Article Card 1 -->
                 <div class="border rounded-lg p-6 hover:shadow-lg transition">
                     <p class="text-xs text-gray-500 mb-2">MARKET ANALYSIS</p>
                     <h4 class="text-lg font-bold mb-2">Why a 1% Drop in Rates Changes Westport's Market</h4>
                     <p class="text-gray-600 text-sm mb-4">A look into how federal interest rate policies directly impact local purchasing power in Fairfield County.</p>
                     <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read More &rarr;</a>
                 </div>
-                <!-- Article Card 2 -->
                 <div class="border rounded-lg p-6 hover:shadow-lg transition">
                     <p class="text-xs text-gray-500 mb-2">DATA DEEP DIVE</p>
                     <h4 class="text-lg font-bold mb-2">Rent vs. Buy: The 2026 Westport Breakdown</h4>
                     <p class="text-gray-600 text-sm mb-4">Comparing median gross rents from the US Census against our real-time mortgage calculations.</p>
                     <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read More &rarr;</a>
                 </div>
-                <!-- Article Card 3 -->
                 <div class="border rounded-lg p-6 hover:shadow-lg transition">
                     <p class="text-xs text-gray-500 mb-2">CIVIC POLICY</p>
                     <h4 class="text-lg font-bold mb-2">What the Recent Mill Rate Shift (13.2) Means</h4>
@@ -125,13 +113,12 @@
         </div>
     </section>
 
-    <!-- About & Resources -->
     <section id="about" class="py-16 px-4 bg-blue-50 text-gray-800">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
                 <h3 class="text-2xl font-bold mb-4">About the Methodology</h3>
-                <p class="mb-4">This engine connects directly to the <strong>FRED API</strong> for live mortgage rates and the <strong>US Census API</strong> (ACS 5-Year Estimates) for median household income and rent data.</p>
-                <p class="mb-4">It applies Connecticut's specific 70% assessed property tax rule against Westport's current 13.2 mill rate to provide hyper-localized, highly accurate macroeconomic insights that standard national calculators miss.</p>
+                <p class="mb-4">This engine connects directly to the <strong>FRED API</strong> for live mortgage rates and the <strong>US Census API</strong> (ACS 5-Year Estimates) for median housing and income data.</p>
+                <p class="mb-4">It applies Connecticut's specific 70% assessed property tax rule against Westport's current mill rate to provide hyper-localized estimates.</p>
             </div>
             <div>
                 <h3 class="text-2xl font-bold mb-4">Resources & Action</h3>
@@ -140,9 +127,6 @@
                     <li><a href="#" class="text-blue-600 hover:underline">Town Zoning Board Schedules &rarr;</a></li>
                     <li><a href="#" class="text-blue-600 hover:underline">Download the Raw Data (CSV) &rarr;</a></li>
                 </ul>
-                <div class="mt-6 border-t border-blue-200 pt-6">
-                    <p class="text-sm text-gray-600">Built by a local developer and economics enthusiast. Check out the code on <a href="#" class="text-blue-600 hover:underline">GitHub</a>.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -151,168 +135,9 @@
         <p>&copy; 2026 Westport Economic Pulse. Open Source under MIT License.</p>
     </footer>
 
-    <!-- JavaScript Logic -->
     <script>
-        // DOM Elements
-        const incomeInput = document.getElementById('incomeInput');
-        const incomeVal = document.getElementById('incomeVal');
-        const downInput = document.getElementById('downInput');
-        const downVal = document.getElementById('downVal');
-        const rentBuyToggle = document.getElementById('rentBuyToggle');
-        
-        // Formatter for currency
-        const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-
-        // Update Slider Labels
-        incomeInput.addEventListener('input', (e) => {
-            incomeVal.textContent = formatter.format(e.target.value);
-            updateDashboard();
-        });
-
-        downInput.addEventListener('input', (e) => {
-            downVal.textContent = e.target.value + '%';
-            updateDashboard();
-        });
-
-        rentBuyToggle.addEventListener('change', updateDashboard);
-
-        /**
-         * API Connection Logic
-         * In Phase 2, we will use fetch() to grab the live data from your Node.js API at localhost:3000
-         */
-async function fetchMacroData() {
-    try {
-        const response = await fetch('http://localhost:3000/api/affordability?zipCode=06880');
-        if (!response.ok) throw new Error(`API error: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error("Failed to connect to API backend:", error);
-        return {
-            inputs: { mortgageRate: 0.0649, medianHomePrice: 2200000, millRate: 13.2 },
-            rentals: { medianGrossRent: 3500 }
-        };
-    }
-}
-            
-            // Mock data representing the shape of our future API response
-            return {
-                inputs: {
-                    mortgageRate: 0.0649,
-                    medianHomePrice: 2200000,
-                    millRate: 13.2
-                },
-                rentals: {
-                    medianGrossRent: 3500 // Mock rent figure
-                }
-            };
-        }
-
-        // Draw Gauge Chart using Canvas
-        function drawGauge(score) {
-            const canvas = document.getElementById('affordabilityChart');
-            if(!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const cw = canvas.width;
-            const ch = canvas.height;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, cw, ch);
-            
-            // Gauge arc settings
-            const radius = 100;
-            const startAngle = Math.PI;
-            const endAngle = 2 * Math.PI;
-            const centerX = cw / 2;
-            const centerY = ch - 10;
-
-            // Draw Background Arc
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-            ctx.lineWidth = 20;
-            ctx.strokeStyle = '#e5e7eb'; // gray-200
-            ctx.stroke();
-
-            // Determine color based on threshold (30% is standard)
-            let color = '#22c55e'; // green
-            if(score > 30 && score <= 50) color = '#eab308'; // yellow
-            if(score > 50) color = '#ef4444'; // red
-
-            // Draw Value Arc
-            // Map score (0-100) to radians
-            const fillScore = Math.min(score, 100); 
-            const valueAngle = startAngle + ((fillScore / 100) * Math.PI);
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, valueAngle);
-            ctx.lineWidth = 20;
-            ctx.strokeStyle = color;
-            ctx.stroke();
-
-            // Draw Text
-            ctx.font = 'bold 24px sans-serif';
-            ctx.fillStyle = '#1f2937';
-            ctx.textAlign = 'center';
-            ctx.fillText(score.toFixed(1) + '%', centerX, centerY - 20);
-        }
-
-        // Main Dashboard Update Loop
-        async function updateDashboard() {
-            const data = await fetchMacroData();
-            
-            // Update Hero Elements
-            document.getElementById('hero-rate').textContent = (data.inputs.mortgageRate * 100).toFixed(2) + '%';
-            document.getElementById('hero-price').textContent = formatter.format(data.inputs.medianHomePrice);
-            
-            // Client-side math for immediate slider feedback
-            const income = parseInt(incomeInput.value);
-            const downPct = parseInt(downInput.value) / 100;
-            const isRent = rentBuyToggle.checked;
-
-            let monthlyCost = 0;
-
-            if (isRent) {
-                // If checking rental costs
-                monthlyCost = data.rentals.medianGrossRent;
-            } else {
-                // If checking ownership costs
-                const principal = data.inputs.medianHomePrice * (1 - downPct);
-                const r = data.inputs.mortgageRate / 12;
-                const n = 360; // 30 years
-                
-                let monthlyMortgage = 0;
-                if(r > 0) {
-                    monthlyMortgage = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-                } else {
-                    monthlyMortgage = principal / n;
-                }
-                
-                // Add CT Property Tax (70% assessment * mill rate / 1000)
-                const annualTax = (data.inputs.medianHomePrice * 0.70) * (data.inputs.millRate / 1000);
-                const monthlyTax = annualTax / 12;
-                
-                // Add estimated PMI if under 20% down
-                let monthlyPMI = 0;
-                if(downPct < 0.20) {
-                    monthlyPMI = (principal * 0.0075) / 12;
-                }
-
-                monthlyCost = monthlyMortgage + monthlyTax + monthlyPMI;
-            }
-
-            // Calculate Score
-            const monthlyGrossIncome = income / 12;
-            const affordabilityScore = (monthlyCost / monthlyGrossIncome) * 100;
-
-            // Update UI
-            document.getElementById('hero-score').textContent = affordabilityScore.toFixed(0) + '%';
-            document.getElementById('monthlyCostDisplay').textContent = formatter.format(monthlyCost);
-            
-            // Draw Canvas Gauge
-            drawGauge(affordabilityScore);
-        }
-
-        // Initialize on load
-        window.addEventListener('DOMContentLoaded', updateDashboard);
+      window.__API_BASE_URL__ = window.__API_BASE_URL__ || 'http://localhost:3000';
     </script>
+    <script type="module" src="./js/ui.js"></script>
 </body>
 </html>
