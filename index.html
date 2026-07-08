@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Westport Economic Pulse</title>
+    <title>Westport Economic Pulse | By Maxim Markov</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { font-family: system-ui, -apple-system, sans-serif; }
     </style>
@@ -17,72 +16,94 @@
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-blue-600">WestportPulse</h1>
             <div class="space-x-4">
-                <a href="#dashboard" class="hover:text-blue-600 transition">Dashboard</a>
-                <a href="#insights" class="hover:text-blue-600 transition">Insights</a>
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#dashboard" class="hover:text-blue-600 transition">Engine</a>
+                <a href="#insights" class="hover:text-blue-600 transition">My Articles</a>
+                <a href="#methodology" class="hover:text-blue-600 transition">Methodology</a>
             </div>
         </div>
     </nav>
 
     <header class="bg-blue-600 text-white py-16 px-4">
         <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">The True Cost of Living in Westport</h2>
-            <p class="text-xl mb-8 opacity-90">Tracking real-time macroeconomic data for community housing affordability.</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Westport Macroeconomic Analysis</h2>
+            <p class="text-xl mb-8 opacity-90">An analytical dashboard engineered by Maxim Markov tracking localized housing metrics via live API integrations.</p>
 
             <div class="flex flex-col md:flex-row justify-center gap-4 text-gray-800">
                 <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Mortgage Rate</p>
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Live Mortgage Rate</p>
                     <p class="text-3xl font-bold" id="hero-rate">--%</p>
                 </div>
                 <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Median Home</p>
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500" id="hero-price-label">Median Home Price</p>
                     <p class="text-3xl font-bold" id="hero-price">$--</p>
                 </div>
                 <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Affordability Score</p>
-                    <p class="text-3xl font-bold text-red-500" id="hero-score">--%</p>
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Market Risk Status</p>
+                    <p class="text-3xl font-bold text-red-500" id="hero-score">--</p>
                 </div>
             </div>
         </div>
     </header>
 
     <section id="dashboard" class="py-16 px-4 max-w-6xl mx-auto">
-        <h3 class="text-2xl font-bold mb-8 text-center border-b pb-4">Housing Affordability Engine</h3>
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h3 class="text-3xl font-bold mb-4">My Affordability Calculation Engine</h3>
+            <p class="text-gray-600">
+                I engineered this platform to cross-examine current macroeconomic pressures against local parameters. By bridging live monetary tracking with local infrastructure data, my programmatic math isolates how compounding elements shape real-world consumer exposure inside Westport.
+            </p>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-sm border">
-                <h4 class="text-lg font-semibold mb-4">Calculate Your Burden</h4>
+            <!-- Controls Card -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border flex flex-col justify-between">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Adjust Computational Variables</h4>
 
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-2">Your Annual Income: <span id="incomeVal" class="font-bold text-blue-600">$250,000</span></label>
-                    <input type="range" min="50000" max="1000000" step="10000" value="250000" class="w-full" id="incomeInput">
-                </div>
+                    <div class="mb-6" id="income-slider-container">
+                        <label class="block text-sm font-medium mb-2">Simulated Annual Income: <span id="incomeVal" class="font-bold text-blue-600">$250,000</span></label>
+                        <input type="range" min="50000" max="1000000" step="10000" value="250000" class="w-full" id="incomeInput">
+                    </div>
 
-                <div class="mb-6">
-                    <label class="block text-sm font-medium mb-2">Down Payment: <span id="downVal" class="font-bold text-blue-600">20%</span></label>
-                    <input type="range" min="0" max="100" step="1" value="20" class="w-full" id="downInput">
+                    <div class="mb-6" id="down-payment-container">
+                        <label class="block text-sm font-medium mb-2">Down Payment Allocation: <span id="downVal" class="font-bold text-blue-600">20%</span></label>
+                        <input type="range" min="0" max="100" step="1" value="20" class="w-full" id="downInput">
+                    </div>
                 </div>
 
                 <div class="flex items-center justify-between border-t pt-4 mt-4">
-                    <span class="font-medium">Compare:</span>
+                    <span class="font-medium text-sm text-gray-700">Select Analytical Mode:</span>
                     <label class="inline-flex items-center cursor-pointer">
-                        <span class="mr-3 text-sm text-gray-600">Buy</span>
+                        <span class="mr-3 text-sm font-semibold text-blue-600" id="toggleLabelBuy">Buy Model</span>
                         <div class="relative">
                             <input type="checkbox" id="rentBuyToggle" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                            <div class="w-11 h-6 bg-blue-600 rounded-full peer peer-checked:bg-gray-400 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
                         </div>
-                        <span class="ml-3 text-sm text-gray-600">Rent</span>
+                        <span class="ml-3 text-sm font-semibold text-gray-400" id="toggleLabelRent">Rent Model</span>
                     </label>
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-sm border flex flex-col items-center justify-center min-h-[300px]">
-                <h4 class="text-lg font-semibold mb-2">Housing Cost vs. Income</h4>
-                <p class="text-sm text-gray-500 mb-4 text-center">Standard rule of thumb suggests spending no more than 30% of gross income on housing.</p>
-                <canvas id="affordabilityChart" width="300" height="150" class="w-full max-w-[300px]"></canvas>
-                <div class="mt-4 text-center">
-                    <p class="text-gray-600 text-sm">Estimated Monthly Cost</p>
-                    <p class="text-3xl font-bold" id="monthlyCostDisplay">$0</p>
+            <!-- Output Display Card -->
+            <div class="bg-white p-6 rounded-lg shadow-sm border flex flex-col items-center justify-center min-h-[350px]">
+                <h4 class="text-lg font-semibold mb-2" id="chartTitle">Computed Housing Burden</h4>
+                <p class="text-sm text-gray-500 mb-6 text-center max-w-sm" id="burdenDescription">
+                    Comparing true carrying costs against simulated gross monthly earnings using standard underwriting limits.
+                </p>
+                
+                <div class="w-full bg-gray-50 rounded-lg p-4 mb-6 border border-dashed text-center">
+                    <p class="text-sm text-gray-500 uppercase tracking-wider font-semibold mb-1" id="costLabel">True Monthly Carrying Cost</p>
+                    <p class="text-4xl font-black text-gray-900" id="monthlyCostDisplay">$0</p>
+                </div>
+
+                <div class="w-full grid grid-cols-2 gap-4 text-sm border-t pt-4" id="metricBreakdownContainer">
+                    <div>
+                        <p class="text-gray-500" id="breakdownLabel1">Mortgage Principal & Int.</p>
+                        <p class="font-bold text-gray-800" id="breakdownVal1">$0</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-500" id="breakdownLabel2">Calculated Property Tax</p>
+                        <p class="font-bold text-gray-800" id="breakdownVal2">$0</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,55 +111,54 @@
 
     <section id="insights" class="bg-white py-16 px-4">
         <div class="max-w-6xl mx-auto">
-            <h3 class="text-2xl font-bold mb-8 text-center border-b pb-4">Local Insights</h3>
+            <h3 class="text-3xl font-bold mb-2 text-center">My Economic Insights</h3>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Essays and deep dives analyzing macro variables, local municipal balance sheets, and real estate trends in Westport.</p>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="border rounded-lg p-6 hover:shadow-lg transition">
-                    <p class="text-xs text-gray-500 mb-2">MARKET ANALYSIS</p>
-                    <h4 class="text-lg font-bold mb-2">Why a 1% Drop in Rates Changes Westport's Market</h4>
-                    <p class="text-gray-600 text-sm mb-4">A look into how federal interest rate policies directly impact local purchasing power in Fairfield County.</p>
-                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read More &rarr;</a>
+                <div class="border rounded-lg p-6 hover:shadow-lg transition flex flex-col justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-blue-600 mb-2">MARKET ANALYSIS</p>
+                        <h4 class="text-lg font-bold mb-2">Why a 1% Drop in Rates Changes Westport's Market</h4>
+                        <p class="text-gray-600 text-sm mb-4">An evaluation of how structural interest rate fluctuations alter purchasing thresholds in local high-tier residential property bands.</p>
+                    </div>
+                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read Analysis &rarr;</a>
                 </div>
-                <div class="border rounded-lg p-6 hover:shadow-lg transition">
-                    <p class="text-xs text-gray-500 mb-2">DATA DEEP DIVE</p>
-                    <h4 class="text-lg font-bold mb-2">Rent vs. Buy: The 2026 Westport Breakdown</h4>
-                    <p class="text-gray-600 text-sm mb-4">Comparing median gross rents from the US Census against our real-time mortgage calculations.</p>
-                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read More &rarr;</a>
+                <div class="border rounded-lg p-6 hover:shadow-lg transition flex flex-col justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-blue-600 mb-2">DATA DEEP DIVE</p>
+                        <h4 class="text-lg font-bold mb-2">Rent vs. Buy: The 2026 Westport Breakdown</h4>
+                        <p class="text-gray-600 text-sm mb-4">Contrasting raw rental baselines from the American Community Survey against active mortgage debt optimization metrics.</p>
+                    </div>
+                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read Analysis &rarr;</a>
                 </div>
-                <div class="border rounded-lg p-6 hover:shadow-lg transition">
-                    <p class="text-xs text-gray-500 mb-2">CIVIC POLICY</p>
-                    <h4 class="text-lg font-bold mb-2">What the Recent Mill Rate Shift (13.2) Means</h4>
-                    <p class="text-gray-600 text-sm mb-4">Breaking down the recent town revaluation and how the new 13.2 mill rate affects your monthly budget.</p>
-                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read More &rarr;</a>
+                <div class="border rounded-lg p-6 hover:shadow-lg transition flex flex-col justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-blue-600 mb-2">CIVIC POLICY</p>
+                        <h4 class="text-lg font-bold mb-2">What the Recent Mill Rate Shift (13.2) Means</h4>
+                        <p class="text-gray-600 text-sm mb-4">Deconstructing the structural adjustments of local revaluations and tracing how the mill rate translates directly to retail overhead.</p>
+                    </div>
+                    <a href="#" class="text-blue-600 font-semibold text-sm hover:underline">Read Analysis &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-16 px-4 bg-blue-50 text-gray-800">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-                <h3 class="text-2xl font-bold mb-4">About the Methodology</h3>
-                <p class="mb-4">This engine connects directly to the <strong>FRED API</strong> for live mortgage rates and the <strong>US Census API</strong> (ACS 5-Year Estimates) for median housing and income data.</p>
-                <p class="mb-4">It applies Connecticut's specific 70% assessed property tax rule against Westport's current mill rate to provide hyper-localized estimates.</p>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold mb-4">Resources & Action</h3>
-                <ul class="space-y-3">
-                    <li><a href="#" class="text-blue-600 hover:underline">Westport Affordable Housing Committee &rarr;</a></li>
-                    <li><a href="#" class="text-blue-600 hover:underline">Town Zoning Board Schedules &rarr;</a></li>
-                    <li><a href="#" class="text-blue-600 hover:underline">Download the Raw Data (CSV) &rarr;</a></li>
-                </ul>
-            </div>
+    <section id="methodology" class="py-16 px-4 bg-blue-50 text-gray-800">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-2xl font-bold mb-6">Behind the Code: Engineering My API</h3>
+            <p class="mb-6 text-left text-gray-700 leading-relaxed">
+                Rather than calculating projections off stationary tables, I built a serverless backend engine deployed on Cloudflare Workers. It acts as an integration gateway that queries live macro data directly from the <strong>Federal Reserve Bank of St. Louis (FRED)</strong> API for active 30-year fixed loan evaluations, while concurrently processing localized household and structural variables using the <strong>US Census Bureau API</strong>.
+            </p>
+            <p class="text-left text-gray-700 leading-relaxed">
+                My codebase resolves census statistical caps by tracking tax distortions natively, generating dynamic debt-to-income models, and parsing immediate temporal snapshots to evaluate exactly how historical policy environments diverge from modern conditions.
+            </p>
         </div>
     </section>
 
     <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
-        <p>&copy; 2026 Westport Economic Pulse. Open Source under MIT License.</p>
+        <p>&copy; 2026 Westport Economic Pulse. Developed by Maxim Markov. Open Source under MIT License.</p>
     </footer>
 
-    <script>
-      window.__API_BASE_URL__ = window.__API_BASE_URL__ || 'http://localhost:3000';
-    </script>
     <script type="module" src="./js/ui.js"></script>
 </body>
 </html>
