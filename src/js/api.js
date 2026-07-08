@@ -1,29 +1,21 @@
-import { config } from './config.js';
-
-async function request(path, options = {}) {
-  const response = await fetch(`${config.API_BASE_URL}${path}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.headers || {}),
-    },
-    ...options,
-  });
-
-  if (!response.ok) {
-    const fallbackMessage = `Request failed with status ${response.status}`;
+// api.js
+export async function fetchAffordabilityData(income, downPaymentPercent) {
+    // Convert whole number percentage (e.g., 20) to a decimal (0.20) for your API
+    const decimalDownPayment = downPaymentPercent / 100;
+    
+    const baseUrl = 'https://my-free-api.maximusman691.workers.dev/api/affordability';
+    const params = new URLSearchParams({
+        zipCode: '06880', // Hardcoded for Westport Pulse
+        income: income,
+        downPayment: decimalDownPayment
+    });
 
     try {
-      const errorPayload = await response.json();
-      throw new Error(errorPayload.error || fallbackMessage);
-    } catch {
-      throw new Error(fallbackMessage);
+        const response = await fetch(`${baseUrl}?${params.toString()}`);
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error("API Fetch Error:", error);
+        return null;
     }
-  }
-
-  return response.json();
-}
-
-export async function getAffordability(zipCode = config.DEFAULT_ZIP_CODE) {
-  const encodedZip = encodeURIComponent(zipCode);
-  return request(`/api/affordability?zipCode=${encodedZip}`);
 }
