@@ -1,118 +1,79 @@
-import { loadDashboardData } from './engine.js';
+// ui.js
+import { fetchAffordabilityData } from './api.js';
 
+// DOM Elements
 const incomeInput = document.getElementById('incomeInput');
-const incomeVal = document.getElementById('incomeVal');
 const downInput = document.getElementById('downInput');
+const incomeVal = document.getElementById('incomeVal');
 const downVal = document.getElementById('downVal');
-const rentBuyToggle = document.getElementById('rentBuyToggle');
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0,
+
+const heroRate = document.getElementById('hero-rate');
+const heroPrice = document.getElementById('hero-price');
+const heroScore = document.getElementById('hero-score');
+const monthlyCostDisplay = document.getElementById('monthlyCostDisplay');
+
+// Currency Formatter
+const formatMoney = new Intl.NumberFormat('en-US', { 
+    style: 'currency', 
+    currency: 'USD', 
+    maximumFractionDigits: 0 
 });
 
-function drawGauge(score) {
-  const canvas = document.getElementById('affordabilityChart');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  const cw = canvas.width;
-  const ch = canvas.height;
-
-  ctx.clearRect(0, 0, cw, ch);
-
-  const radius = 100;
-  const startAngle = Math.PI;
-  const endAngle = 2 * Math.PI;
-  const centerX = cw / 2;
-  const centerY = ch - 10;
-
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-  ctx.lineWidth = 20;
-  ctx.strokeStyle = '#e5e7eb';
-  ctx.stroke();
-
-  let color = '#22c55e';
-  if (score > 30 && score <= 50) color = '#eab308';
-  if (score > 50) color = '#ef4444';
-
-  const fillScore = Math.min(score, 100);
-  const valueAngle = startAngle + (fillScore / 100) * Math.PI;
-
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, radius, startAngle, valueAngle);
-  ctx.lineWidth = 20;
-  ctx.strokeStyle = color;
-  ctx.stroke();
-
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillStyle = '#1f2937';
-  ctx.textAlign = 'center';
-  ctx.fillText(`${score.toFixed(1)}%`, centerX, centerY - 20);
+// Debounce Utility to prevent API spam while dragging sliders
+let fetchTimeout;
+function debounceFetch(income, downPayment) {
+    clearTimeout(fetchTimeout);
+    fetchTimeout = setTimeout(() => {
+        executeApiUpdate(income, downPayment);
+    }, 300); // Waits 300ms after the user stops sliding
 }
 
-async function updateDashboard() {
-  const zipCode = '06880';
-  const data = await loadDashboardData(zipCode);
+// Core API Execution & DOM Injection
+async function executeApiUpdate(income, downPayment) {
+    monthlyCostDisplay.textContent = "Calculating...";
+    
+    const data = await fetchAffordabilityData(income, downPayment);
+    if (!data) {
+        monthlyCostDisplay.textContent = "Error loading data";
+        return;
+    }
 
-  const mortgageRate = data?.inputs?.mortgageRate ?? 0.0649;
-  const medianHomePrice = data?.inputs?.medianHomePrice ?? 2200000;
-  const millRate = data?.inputs?.millRate ?? 13.2;
-  const medianGrossRent = data?.inputs?.medianGrossRent ?? 3500;
+    // Update Hero Section
+    heroRate.textContent = `${(data.inputs.mortgageRate * 100).toFixed(2)}%`;
+    heroPrice.textContent = formatMoney.format(data.inputs.medianHomePrice);
+    heroScore.textContent = `${(data.affordabilityScore * 100).toFixed(1)}%`;
 
-  document.getElementById('hero-rate').textContent = `${(mortgageRate * 100).toFixed(2)}%`;
-  document.getElementById('hero-price').textContent = formatter.format(medianHomePrice);
-
-  const income = Number.parseInt(incomeInput.value, 10);
-  const downPct = Number.parseInt(downInput.value, 10) / 100;
-  const isRent = rentBuyToggle.checked;
-
-  let monthlyCost;
-
-  if (isRent) {
-    monthlyCost = medianGrossRent;
-  } else {
-    const principal = medianHomePrice * (1 - downPct);
-    const r = mortgageRate / 12;
-    const n = 360;
-
-    let monthlyMortgage = 0;
-    if (r > 0) {
-      monthlyMortgage = (principal * (r * Math.pow(1 + r, n))) / (Math.pow(1 + r, n) - 1);
+    // Dynamic color coding based on underwriting status
+    if (data.marketStatus === 'Affordable') {
+        heroScore.className = "text-3xl font-bold text-green-500";
+    } else if (data.marketStatus === 'Stretch') {
+        heroScore.className = "text-3xl font-bold text-yellow-500";
     } else {
-      monthlyMortgage = principal / n;
+        heroScore.className = "text-3xl font-bold text-red-500";
     }
 
-    const annualTax = medianHomePrice * 0.7 * (millRate / 1000);
-    const monthlyTax = annualTax / 12;
-
-    let monthlyPMI = 0;
-    if (downPct < 0.2) {
-      monthlyPMI = (principal * 0.0075) / 12;
-    }
-
-    monthlyCost = monthlyMortgage + monthlyTax + monthlyPMI;
-  }
-
-  const monthlyGrossIncome = income / 12;
-  const affordabilityScore = (monthlyCost / monthlyGrossIncome) * 100;
-
-  document.getElementById('hero-score').textContent = `${affordabilityScore.toFixed(0)}%`;
-  document.getElementById('monthlyCostDisplay').textContent = formatter.format(monthlyCost);
-
-  drawGauge(affordabilityScore);
+    // Update Dashboard
+    monthlyCostDisplay.textContent = formatMoney.format(data.trueMonthlyHousingCost);
 }
 
-incomeInput.addEventListener('input', (event) => {
-  incomeVal.textContent = formatter.format(event.target.value);
-  updateDashboard();
-});
+// Event Handler for UI Updates
+function handleSliderChange() {
+    const currentIncome = incomeInput.value;
+    const currentDownPayment = downInput.value;
 
-downInput.addEventListener('input', (event) => {
-  downVal.textContent = `${event.target.value}%`;
-  updateDashboard();
-});
+    // 1. Instantly update the text labels so the UI feels responsive
+    incomeVal.textContent = formatMoney.format(currentIncome);
+    downVal.textContent = `${currentDownPayment}%`;
 
-rentBuyToggle.addEventListener('change', updateDashboard);
-window.addEventListener('DOMContentLoaded', updateDashboard);
+    // 2. Trigger the debounced API call
+    debounceFetch(currentIncome, currentDownPayment);
+}
+
+// Event Listeners
+incomeInput.addEventListener('input', handleSliderChange);
+downInput.addEventListener('input', handleSliderChange);
+
+// Initial Load
+document.addEventListener('DOMContentLoaded', () => {
+    handleSliderChange(); // Run once on page load to populate default data
+});
