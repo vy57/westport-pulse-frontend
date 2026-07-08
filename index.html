@@ -24,25 +24,10 @@
         </div>
     </nav>
 
-    <header class="bg-blue-600 text-white py-16 px-4">
+    <header class="bg-blue-600 text-white py-20 px-4">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight">The Westport Pulse</h2>
-            <p class="text-xl mb-8 opacity-90 font-light">Tracking localized housing metrics and economic trends in Fairfield County.</p>
-
-            <div class="flex flex-col md:flex-row justify-center gap-4 text-gray-800">
-                <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Live Mortgage Rate</p>
-                    <p class="text-3xl font-bold" id="hero-rate">--%</p>
-                </div>
-                <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Median Home Price</p>
-                    <p class="text-3xl font-bold" id="hero-price">$--</p>
-                </div>
-                <div class="bg-white px-6 py-4 rounded-lg shadow-md flex-1 max-w-xs mx-auto">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Market Risk Status</p>
-                    <p class="text-3xl font-bold text-red-500" id="hero-score">--</p>
-                </div>
-            </div>
+            <p class="text-xl font-light opacity-90 max-w-2xl mx-auto">Tracking localized housing metrics and economic trends in Fairfield County.</p>
         </div>
     </header>
 
@@ -101,12 +86,28 @@
     </section>
 
     <section id="calculator" class="py-16 px-4 max-w-6xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-12">
+        <div class="text-center max-w-3xl mx-auto mb-10">
             <h2 class="text-4xl font-extrabold mb-2 text-gray-900">Westport Macroeconomic Analysis</h2>
             <h3 class="text-2xl font-bold mb-4 text-blue-600">My Affordability Calculation Engine</h3>
             <p class="text-gray-600">
                 I engineered this platform to cross-examine current macroeconomic pressures against local parameters using live API data. Adjust the variables below to see how different financial scenarios impact the housing burden.
             </p>
+        </div>
+
+        <!-- THE METRIC BOXES ARE NOW HERE -->
+        <div class="flex flex-col md:flex-row justify-center gap-4 text-gray-800 mb-12">
+            <div class="bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200 flex-1 max-w-xs mx-auto text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Live Mortgage Rate</p>
+                <p class="text-3xl font-bold text-blue-600" id="hero-rate">--%</p>
+            </div>
+            <div class="bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200 flex-1 max-w-xs mx-auto text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Median Home Price</p>
+                <p class="text-3xl font-bold text-gray-900" id="hero-price">$--</p>
+            </div>
+            <div class="bg-white px-6 py-4 rounded-lg shadow-sm border border-gray-200 flex-1 max-w-xs mx-auto text-center">
+                <p class="text-sm font-semibold uppercase tracking-wider text-gray-500">Market Risk Status</p>
+                <p class="text-3xl font-bold text-red-500" id="hero-score">--</p>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
